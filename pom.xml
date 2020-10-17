@@ -12,6 +12,7 @@
         <module>cloud-mall-common</module>
         <module>cloud-mall-auth</module>
         <module>cloud-mall-gateway</module>
+        <module>cloud-mall-sms</module>
     </modules>
 
     <!--  统一管理Jar包版本  -->
@@ -30,6 +31,8 @@
         <lang3.vsersion>3.9</lang3.vsersion>
         <hutool.version>5.4.4</hutool.version>
         <aop.version>1.9.5</aop.version>
+        <aliyun.sdk.version>4.5.3</aliyun.sdk.version>
+        <fastjson.version>1.2.29</fastjson.version>
     </properties>
 
     <!--  子模块继承之后，提供作用：锁定版本 + 子模块不用再写version  -->
@@ -84,6 +87,11 @@
                 <version>${velocity.engine.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.sdk.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aop.version}</version>
@@ -124,6 +132,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

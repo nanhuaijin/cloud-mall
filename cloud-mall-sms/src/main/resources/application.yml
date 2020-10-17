@@ -1,0 +1,17 @@
+server:
+  port: 7000
+
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 127.0.0.1
+    username: root
+    password: root
+    virtual-host: /mall
+  redis:
+    host: localhost
+
+sms:
+  accessKeyId:
+  accessSecret:
