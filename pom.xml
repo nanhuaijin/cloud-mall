@@ -19,16 +19,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compoler.target>1.8</maven.compoler.target>
-        <junit.version>4.13.1</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.18.10</lombok.version>
-        <mysql.version>8.0.16</mysql.version>
+        <mysql.version>8.0.18</mysql.version>
         <druid.version>1.1.16</druid.version>
         <mybatis.plus.version>3.0.5</mybatis.plus.version>
         <velocity.engine.version>2.0</velocity.engine.version>
         <swagger2.vsersion>2.9.2</swagger2.vsersion>
         <swagger2.ui.vsersion>2.7.0</swagger2.ui.vsersion>
         <lang3.vsersion>3.9</lang3.vsersion>
+        <hutool.version>5.4.4</hutool.version>
     </properties>
 
     <!--  子模块继承之后，提供作用：锁定版本 + 子模块不用再写version  -->
@@ -82,12 +82,6 @@
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.engine.version}</version>
             </dependency>
-            <!--junit-->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-            </dependency>
             <!--log4j-->
             <dependency>
                 <groupId>log4j</groupId>
@@ -119,10 +113,25 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${lang3.vsersion}</version>
             </dependency>
+            <!--hu tool-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -134,5 +143,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

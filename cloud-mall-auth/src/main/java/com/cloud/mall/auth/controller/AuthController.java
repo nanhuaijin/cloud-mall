@@ -1,12 +1,14 @@
 package com.cloud.mall.auth.controller;
 
+import com.cloud.mall.auth.entity.UserDO;
 import com.cloud.mall.auth.service.AuthService;
+import com.cloud.mall.auth.vo.AuthVO;
 import com.cloud.mall.common.result.BaseResponse;
 import com.cloud.mall.common.result.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import jdk.nashorn.internal.runtime.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @description :
  */
 @RestController
-@Logger
+@Slf4j
 @Api(tags = "登录认证Controller")
 @RequestMapping("/auth")
 public class AuthController {
@@ -28,15 +30,9 @@ public class AuthController {
     @PostMapping("/accredit")
     public BaseResponse authentication(
             @ApiParam(name = "username", value = "账号", required = true)
-            @RequestParam("username") String username,
-            @ApiParam(name = "password", value = "密码", required = true)
-            @RequestParam("password") String password) {
+            @RequestBody AuthVO authVO) {
 
-        boolean flag = this.authService.authentication(username, password);
-        if (flag) {
-            return BaseResponse.setResult(ResultCodeEnum.ACCOUNT_LOGIN_SUCCESS);
-        } else {
-            return BaseResponse.setResult(ResultCodeEnum.ACCOUNT_OR_PASSWORD_ERROR);
-        }
+        UserDO userDO = this.authService.authentication(authVO);
+        return BaseResponse.setResult(ResultCodeEnum.ACCOUNT_LOGIN_SUCCESS).data("user", userDO);
     }
 }

@@ -6,6 +6,11 @@ package com.cloud.mall.common.consts;
  * @description : 项目常量
  */
 public interface AppConst {
+
+    /**
+     * 微信小程序授权登录url地址
+     */
+    String WX_LOGIN_URL = "https://api.weixin.qq.com/sns/jscode2session?appid=";
     /**
      * redis中存储验证码的前缀
      */

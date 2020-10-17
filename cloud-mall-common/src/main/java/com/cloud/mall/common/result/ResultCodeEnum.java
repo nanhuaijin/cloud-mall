@@ -40,7 +40,7 @@ public enum ResultCodeEnum {
     UPDATE_TOKEN_EQUALS_ERROR(41012, "表单Token校验失败，请刷新重试"),
     CHECK_PASSWORD_ERROR(41013, "密码验证失败，请重新输入"),
     UPDATE_PASSWORD_EXPIRE_ERROR(41014, "每天只能修改一次密码"),
-
+    WX_AUTHORIZE_LOGIN_ERROR(41015, "微信授权登录失败"),
 
     REPEAT_PUNCH_CLOCK(42000, "请不要重复打卡"),
     PUNCH_CLOCK_LOWER_ERROR(42001, "请先进行上班打卡");
