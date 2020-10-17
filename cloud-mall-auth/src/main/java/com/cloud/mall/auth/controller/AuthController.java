@@ -35,4 +35,16 @@ public class AuthController {
         UserDO userDO = this.authService.authentication(authVO);
         return BaseResponse.setResult(ResultCodeEnum.ACCOUNT_LOGIN_SUCCESS).data("user", userDO);
     }
+
+    @ApiOperation("发送手机验证码")
+    @GetMapping("/sms")
+    public BaseResponse sendSMS(
+            @ApiParam(name = "phone", value = "手机号码", required = true)
+            @RequestParam("phone") String phone,
+            @ApiParam(name = "type", value = "类型 0-绑定手机 1-解绑手机", required = true)
+            @RequestParam("type") int type) {
+
+        this.authService.sendSms(phone, type);
+        return BaseResponse.setResult(ResultCodeEnum.SEND_SMS_CODE_SUCCESS);
+    }
 }

@@ -16,4 +16,11 @@ public interface AuthService extends IService<UserDO> {
      * @return
      */
     UserDO authentication(AuthVO authVO);
+
+    /**
+     * 发送手机验证码
+     * @param phone 手机号码
+     * @param type 0-绑定手机号 1-解绑手机号
+     */
+    void sendSms(String phone, int type);
 }

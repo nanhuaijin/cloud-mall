@@ -44,6 +44,9 @@ public class UserDO extends BaseDO {
     @ApiModelProperty(value = "手机号码")
     private String phone;
 
+    @ApiModelProperty(value = "生日")
+    private String birthday;
+
     @ApiModelProperty(value = "城市")
     private String city;
 
