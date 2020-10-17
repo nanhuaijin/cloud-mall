@@ -9,6 +9,7 @@ import com.cloud.mall.auth.entity.UserDO;
 import com.cloud.mall.auth.mapper.UserMapper;
 import com.cloud.mall.auth.service.AuthService;
 import com.cloud.mall.auth.vo.AuthVO;
+import com.cloud.mall.common.annotation.MallLog;
 import com.cloud.mall.common.consts.AppConst;
 import com.cloud.mall.common.exception.ApplicationException;
 import com.cloud.mall.common.result.ResultCodeEnum;
@@ -36,6 +37,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     @Autowired
     private WXLoginProperties wxLoginProperties;
 
+    @MallLog
     @Override
     public UserDO authentication(AuthVO authVO) {
 
@@ -52,6 +54,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         //3.如果map为空或者errCode存在，授权登录异常
         Object errCode = map.get("errcode");
         if (CollectionUtil.isEmpty(map) || !StringUtils.isEmpty(errCode)) {
+            log.error("微信授权登录返回参数：" + map.toString());
             throw new ApplicationException(ResultCodeEnum.WX_AUTHORIZE_LOGIN_ERROR);
         }
 

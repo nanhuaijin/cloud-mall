@@ -29,6 +29,7 @@
         <swagger2.ui.vsersion>2.7.0</swagger2.ui.vsersion>
         <lang3.vsersion>3.9</lang3.vsersion>
         <hutool.version>5.4.4</hutool.version>
+        <aop.version>1.9.5</aop.version>
     </properties>
 
     <!--  子模块继承之后，提供作用：锁定版本 + 子模块不用再写version  -->
@@ -81,6 +82,11 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.engine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aop.version}</version>
             </dependency>
             <!--log4j-->
             <dependency>
