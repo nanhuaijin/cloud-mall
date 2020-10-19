@@ -3,6 +3,7 @@ package com.cloud.mall.auth.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cloud.mall.auth.entity.UserDO;
 import com.cloud.mall.auth.vo.AuthVO;
+import com.cloud.mall.auth.vo.RegisterVO;
 
 /**
  * @author : breeze
@@ -23,4 +24,23 @@ public interface AuthService extends IService<UserDO> {
      * @param type 0-绑定手机号 1-解绑手机号
      */
     void sendSms(String phone, int type);
+
+    /**
+     * 注册账号 - 绑定手机号码
+     * @param registerVO
+     */
+    UserDO register(RegisterVO registerVO);
+
+    /**
+     * 解除绑定手机号码
+     * @param registerVO
+     */
+    void untiePhone(RegisterVO registerVO);
+
+    /**
+     * 更新生日
+     * @param birthday 生日
+     * @param id 当前用户id
+     */
+    void updateBirthday(String birthday, Integer id);
 }

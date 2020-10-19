@@ -9,6 +9,7 @@ import com.cloud.mall.auth.entity.UserDO;
 import com.cloud.mall.auth.mapper.UserMapper;
 import com.cloud.mall.auth.service.AuthService;
 import com.cloud.mall.auth.vo.AuthVO;
+import com.cloud.mall.auth.vo.RegisterVO;
 import com.cloud.mall.common.annotation.MallLog;
 import com.cloud.mall.common.consts.AppConst;
 import com.cloud.mall.common.exception.ApplicationException;
@@ -150,5 +151,65 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         count++;
         this.redisTemplate.opsForValue().set(AppConst.SMS_CODE_COUNT_PREFIX + phone,
                 String.valueOf(count), expire, TimeUnit.MINUTES);
+    }
+
+    @Override
+    public UserDO register(RegisterVO registerVO) {
+
+        String phone = registerVO.getPhone();
+        String code = registerVO.getCode();
+        //1.校验验证码
+        checkPhoneCode(phone, code);
+
+        //2.绑定手机
+        QueryWrapper<UserDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid", registerVO.getOpenid());
+        UserDO userDO = new UserDO();
+        userDO.setPhone(phone);
+        this.baseMapper.update(userDO, wrapper);
+        return this.baseMapper.selectOne(wrapper);
+    }
+
+    /**
+     * 校验手机验证码
+     * @param phone
+     * @param code
+     */
+    private void checkPhoneCode(String phone, String code) {
+        //1.从redis中获取验证码
+        String codeConfirm = this.redisTemplate.opsForValue().get(AppConst.SMS_CODE_PREFIX + phone);
+        //2.redis中验证码不存在
+        if (StringUtils.isEmpty(codeConfirm)) {
+            throw new ApplicationException(ResultCodeEnum.CODE_HAS_EXPIRED_ERROR);
+        }
+
+        //3.验证码校验不通过
+        if (!codeConfirm.equals(code)) {
+            throw new ApplicationException(ResultCodeEnum.CODE_UNEQUAL_ERROR);
+        }
+
+        //4.验证完毕后删除验证码
+        this.redisTemplate.delete(AppConst.SMS_CODE_PREFIX + phone);
+    }
+
+    @Override
+    public void untiePhone(RegisterVO registerVO) {
+
+        String code = registerVO.getCode();
+        String phone = registerVO.getPhone();
+        //1.校验验证码
+        this.checkPhoneCode(phone, code);
+
+        //2.解绑
+        this.userMapper.updateOneUntiePhone(registerVO.getOpenid());
+    }
+
+    @Override
+    public void updateBirthday(String birthday, Integer id) {
+
+        UserDO userDO = new UserDO();
+        userDO.setId(id);
+        userDO.setBirthday(birthday);
+        this.baseMapper.updateById(userDO);
     }
 }

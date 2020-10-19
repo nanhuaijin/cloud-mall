@@ -3,6 +3,7 @@ package com.cloud.mall.auth.controller;
 import com.cloud.mall.auth.entity.UserDO;
 import com.cloud.mall.auth.service.AuthService;
 import com.cloud.mall.auth.vo.AuthVO;
+import com.cloud.mall.auth.vo.RegisterVO;
 import com.cloud.mall.common.result.BaseResponse;
 import com.cloud.mall.common.result.ResultCodeEnum;
 import io.swagger.annotations.Api;
@@ -46,5 +47,37 @@ public class AuthController {
 
         this.authService.sendSms(phone, type);
         return BaseResponse.setResult(ResultCodeEnum.SEND_SMS_CODE_SUCCESS);
+    }
+
+    @ApiOperation("注册账号 - 绑定手机号")
+    @PostMapping("/register")
+    public BaseResponse register(
+            @ApiParam(name = "registerVO", value = "注册VO对象", required = true)
+            @RequestBody RegisterVO registerVO) {
+
+        UserDO userDO = this.authService.register(registerVO);
+        return BaseResponse.setResult(ResultCodeEnum.ACCOUNT_REGISTER_SUCCESS).data("user", userDO);
+    }
+
+    @ApiOperation("解绑手机号码")
+    @PostMapping("/untie")
+    public BaseResponse untiePhone(
+            @ApiParam(name = "registerVO", value = "注册VO对象", required = true)
+            @RequestBody RegisterVO registerVO) {
+
+        this.authService.untiePhone(registerVO);
+        return BaseResponse.setResult(ResultCodeEnum.UNTIE_PHONE_SUCCESS);
+    }
+
+    @ApiOperation("更新生日")
+    @GetMapping("/birthday/{id}")
+    public BaseResponse updateBirthday(
+            @ApiParam(name = "birthday", value = "生日", required = true)
+            @RequestParam("birthday") String birthday,
+            @ApiParam(name = "id", value = "当前用户id", required = true)
+            @PathVariable("id") Integer id) {
+
+        this.authService.updateBirthday(birthday, id);
+        return BaseResponse.success().message("更新生日成功");
     }
 }

@@ -2,6 +2,7 @@ package com.cloud.mall.auth.mapper;
 
 import com.cloud.mall.auth.entity.UserDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author breeze
  * @since 2020-10-16
  */
+@Mapper
 public interface UserMapper extends BaseMapper<UserDO> {
 
+    /**
+     * 根据手机号码解绑手机号码
+     * @param openid
+     * @return
+     */
+    void updateOneUntiePhone(String openid);
 }

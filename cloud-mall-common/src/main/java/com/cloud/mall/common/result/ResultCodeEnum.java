@@ -23,6 +23,7 @@ public enum ResultCodeEnum {
     ACCOUNT_REGISTER_SUCCESS(20000, "员工账号注册成功"),
     ACCOUNT_LOGOUT_SUCCESS(20000, "退出登录成功"),
     SEND_SMS_CODE_SUCCESS(20000, "验证码发送成功"),
+    UNTIE_PHONE_SUCCESS(20000, "解绑手机号码成功"),
 
     ACCOUNT_NOT_EXISTS_ERROR(41000, "该用户不存在"),
     ACCOUNT_OR_PASSWORD_ERROR(41001, "账号或密码错误"),

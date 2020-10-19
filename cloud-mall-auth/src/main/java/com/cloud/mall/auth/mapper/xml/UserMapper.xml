@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.mall.auth.mapper.UserMapper">
 
+    <sql id="Base_Column_list">
+        id, openid, session_key, code, nick_name, gender, phone, birthday, city, province, country,
+        avatar_url, del, create_time, update_time
+    </sql>
+
+    <update id="updateOneUntiePhone">
+        UPDATE mall_user
+        SET phone = NULL
+        WHERE openid = #{openid} AND del = 0
+    </update>
+
 </mapper>
