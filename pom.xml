@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>cloud-mall-common</module>
-        <module>cloud-mall-auth</module>
+        <module>cloud-mall-user</module>
         <module>cloud-mall-gateway</module>
         <module>cloud-mall-sms</module>
     </modules>

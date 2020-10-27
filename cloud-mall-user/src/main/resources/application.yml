@@ -1,0 +1,39 @@
+server:
+  port: 8000
+
+spring:
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jackson: #全局统一日期格式返回
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  rabbitmq:
+    host: 127.0.0.1
+    username: root
+    password: root
+    virtual-host: /mall
+  redis:
+    host: localhost
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/cloud/mall/user/mapper/xml/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+wx:
+  appId:
+  secret:
+  grantType:

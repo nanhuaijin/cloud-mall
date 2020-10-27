@@ -8,9 +8,9 @@ spring:
     gateway:
       routes:
         - id: auth-route
-          uri: lb://auth-service
+          uri: lb://user-service
           predicates:
-            - Path=/auth/**
+            - Path=/user/**
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
