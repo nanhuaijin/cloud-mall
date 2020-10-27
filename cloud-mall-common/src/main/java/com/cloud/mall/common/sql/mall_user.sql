@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 16/10/2020 17:05:40
+ Date: 27/10/2020 18:02:42
 */
 
 SET NAMES utf8mb4;
@@ -23,12 +23,14 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `mall_user`;
 CREATE TABLE `mall_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `role_id` int(11) DEFAULT '2' COMMENT '关联mall_role表id，默认2-用户',
   `openid` varchar(255) DEFAULT NULL COMMENT '微信openid',
   `session_key` varchar(255) DEFAULT NULL COMMENT '微信会话密钥',
   `code` varchar(255) DEFAULT NULL COMMENT '验证微信登录的code，前端传递',
   `nick_name` varchar(32) DEFAULT NULL COMMENT '微信昵称',
   `gender` int(1) DEFAULT '1' COMMENT '性别 0-女 1-男',
   `phone` char(11) DEFAULT NULL COMMENT '手机号码',
+  `birthday` varchar(20) DEFAULT NULL,
   `city` varchar(32) DEFAULT NULL COMMENT '城市',
   `province` varchar(32) DEFAULT NULL COMMENT '省份',
   `country` varchar(32) DEFAULT NULL COMMENT '国家',
