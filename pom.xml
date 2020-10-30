@@ -13,6 +13,7 @@
         <module>cloud-mall-user</module>
         <module>cloud-mall-gateway</module>
         <module>cloud-mall-sms</module>
+        <module>cloud-mall-oss</module>
     </modules>
 
     <!--  统一管理Jar包版本  -->

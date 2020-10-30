@@ -11,6 +11,10 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
+        - id: oss-route
+          uri: lb://oss-service
+          predicates:
+            - Path=/oss/**
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
